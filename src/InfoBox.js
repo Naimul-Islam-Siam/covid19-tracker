@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 
-function InfoBox({ title, total, cases }) {
+function InfoBox({ title, total, todayCases }) {
    return (
       <Card className="infoBox">
          <CardContent>
@@ -9,11 +9,11 @@ function InfoBox({ title, total, cases }) {
                {title}
             </Typography>
 
+            <h4 className="infoBox__todayCases">{todayCases}</h4>
+
             <Typography className="infoBox__total" color="textSecondary">
                {total} Total
             </Typography>
-
-            <h4 className="infoBox__cases">{cases}</h4>
          </CardContent>
       </Card>
    )
