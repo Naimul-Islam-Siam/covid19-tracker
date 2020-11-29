@@ -4,15 +4,30 @@
   box-sizing: border-box;
 }
 
+.app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 30px 20px;
+}
+
+.app__left {
+  flex: 0.9;
+}
+
 .app__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
   margin-bottom: 30px;
 }
 
 .app__stats {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
 }
