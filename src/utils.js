@@ -1,0 +1,1 @@
+export const sortData = (data) => data.sort((a, b) => b.cases - a.cases);
