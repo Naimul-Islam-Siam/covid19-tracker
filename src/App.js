@@ -13,9 +13,10 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
 
+  const proxy = "https://cors-anywhere.herokuapp.com/";
 
   useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/all")
+    fetch(`${proxy}https://disease.sh/v3/covid-19/all`)
       .then(res => res.json())
       .then(data => {
         setCountryInfo(data);
@@ -25,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const getCountries = async () => {
-      await fetch("https://disease.sh/v3/covid-19/countries")
+      await fetch(`${proxy}https://disease.sh/v3/covid-19/countries`)
         .then(res => res.json())
         .then(data => {
           const countries = data.map(country => (
@@ -49,7 +50,7 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
 
-    const url = countryCode === "worldwide" ? "https://disease.sh/v3/covid-19/all" : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+    const url = countryCode === "worldwide" ? `${proxy}https://disease.sh/v3/covid-19/all` : `${proxy}https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
     await fetch(url)
       .then(res => res.json())
