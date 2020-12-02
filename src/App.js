@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { MenuItem, FormControl, Select, Card, CardContent } from '@material-ui/core';
 import InfoBox from './InfoBox';
 import './App.css';
-import { sortData } from './utils';
+import { proxy, sortData } from './utils';
 import Map from './Map';
 import Table from './Table';
+import BarChart from './BarChart';
 
 
 function App() {
@@ -12,8 +13,6 @@ function App() {
   const [country, setCountry] = useState(['worldwide']);
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
-
-  const proxy = "https://cors-anywhere.herokuapp.com/";
 
   useEffect(() => {
     fetch(`${proxy}https://disease.sh/v3/covid-19/all`)
@@ -91,8 +90,11 @@ function App() {
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
+        </CardContent>
 
+        <CardContent>
           <h3>Worldwide new cases</h3>
+          <BarChart />
         </CardContent>
       </Card>
     </div>
