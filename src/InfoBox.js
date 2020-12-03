@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { numberWithCommas, showOneDecimalOnly } from './utils';
 import { styleInfoBox, styleInfoBoxTitle, styleTotalFunc, percentageStyle } from './InfoBox.styles';
+import './InfoBox.css';
+
 
 function InfoBox({ title, total, todayCases, percentage }) {
    if (total) {
