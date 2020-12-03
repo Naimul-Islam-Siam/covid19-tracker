@@ -6,6 +6,7 @@ import { proxy, sortData } from './utils';
 import Map from './Map';
 import Table from './Table';
 import BarChart from './BarChart';
+import 'leaflet/dist/leaflet.css';
 
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
   const [country, setCountry] = useState(['worldwide']);
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState([34.80746, -40.4796]);
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
 
   useEffect(() => {
     fetch(`${proxy}https://disease.sh/v3/covid-19/all`)
@@ -37,6 +41,7 @@ function App() {
 
           const sortedData = sortData(data);
 
+          setMapCountries(data);
           setTableData(sortedData);
           setCountries(countries);
         });
@@ -56,6 +61,12 @@ function App() {
       .then(data => {
         setCountry(countryCode);
         setCountryInfo(data);
+
+        if (data.countryInfo.lat && data.countryInfo.long) {
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          console.log(mapCenter);
+          setMapZoom(4);
+        }
       });
   };
 
@@ -73,7 +84,7 @@ function App() {
             <Select variant="outlined" value={country} onChange={onCountryChange}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map(country => (
-                <MenuItem value={country.value}>{country.name}</MenuItem>
+                <MenuItem key={country.value} value={country.value}>{country.name}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -87,7 +98,7 @@ function App() {
           </Suspense>
         </div>
 
-        <Map />
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
 
 

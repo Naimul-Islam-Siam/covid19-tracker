@@ -1,0 +1,87 @@
+.map {
+  height: 500px;
+  border: 1px solid #000;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.map .leaflet-container {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.popup-container {
+  width: 170px;
+}
+
+.popup-flag {
+  width: 100%;
+  height: 80px;
+  background-size: cover;
+  border-radius: 10px;
+  margin-bottom: 7px;
+}
+
+.popup-flag img {
+  width: 100px;
+}
+
+.popup-country {
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.popup-cases {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.popup-recovered {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.popup-deaths {
+  display: flex;
+  align-items: baseline;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.popup-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.popup-marker-cases {
+  background-color: #de3700;
+}
+
+.popup-marker-recovered {
+  background-color: rgb(96, 187, 105);
+}
+
+.popup-marker-deaths {
+  background-color: #cc1034;
+}
+
+.number {
+  margin-left: 5px;
+  color: #767676;
+  font-weight: 400;
+}
