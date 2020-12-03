@@ -1,13 +1,14 @@
 import React from 'react';
 import './Table.css';
+import { numberWithCommas } from './utils';
 
 const Table = ({ countries }) => {
    return (
       <div className="table">
          {countries.map(({ country, cases }) => (
             <tr>
-               <td>{country}</td>
-               <td><strong>{cases}</strong></td>
+               <td><strong>{country}</strong></td>
+               <td>{numberWithCommas(cases)}</td>
             </tr>
          ))}
       </div>

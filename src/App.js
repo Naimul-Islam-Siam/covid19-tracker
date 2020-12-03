@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { MenuItem, FormControl, Select, Card, CardContent } from '@material-ui/core';
 import InfoBox from './InfoBox';
 import './App.css';
@@ -60,6 +60,9 @@ function App() {
   };
 
   const { cases, recovered, deaths, todayCases, todayRecovered, todayDeaths } = countryInfo;
+  const closedCases = recovered + deaths;
+  const recoveredPercent = (recovered / closedCases) * 100;
+  const deathPercent = (deaths / closedCases) * 100;
 
   return (
     <div className="app">
@@ -77,9 +80,11 @@ function App() {
         </div>
 
         <div className="app__stats">
-          <InfoBox title="Confirmed" total={cases} todayCases={todayCases} />
-          <InfoBox title="Recovered" total={recovered} todayCases={todayRecovered} />
-          <InfoBox title="Deceased" total={deaths} todayCases={todayDeaths} />
+          <Suspense>
+            <InfoBox title="Confirmed" total={cases} todayCases={todayCases} />
+            <InfoBox title="Recovered" total={recovered} todayCases={todayRecovered} percentage={recoveredPercent} />
+            <InfoBox title="Deceased" total={deaths} todayCases={todayDeaths} percentage={deathPercent} />
+          </Suspense>
         </div>
 
         <Map />

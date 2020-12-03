@@ -3,6 +3,10 @@ import numeral from "numeral";
 
 export const proxy = "https://cors-anywhere.herokuapp.com/";
 
+export const numberWithCommas = number => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+export const showOneDecimalOnly = (number) => Math.round(number * 10) / 10;
+
 export const sortData = (data) => data.sort((a, b) => b.cases - a.cases);
 
 export const buildChartData = data => {
