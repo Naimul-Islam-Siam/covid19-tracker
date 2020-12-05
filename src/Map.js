@@ -15,8 +15,8 @@ const Map = ({ countries, caseType, center, zoom }) => {
          <MapContainer>
             <ChangeLocationInMap center={center} zoom={zoom} />
             <TileLayer
-               url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png"
-               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+               url="https://api.mapbox.com/styles/v1/naimul-islam-siam/ckchv9xlx2gce1iphjiuz58m9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmFpbXVsLWlzbGFtLXNpYW0iLCJhIjoiY2tjaHVxZmYwMGUxYjJxbnZvOXpxYjVteiJ9.ClSugxDI-zJB0t0RyhkOuQ"
+               attribution='&copy; <a href="https://www.mapbox.com/">Mapbox</a> contributors'
             />
             {showDataOnMap(countries, caseType)}
          </MapContainer>
