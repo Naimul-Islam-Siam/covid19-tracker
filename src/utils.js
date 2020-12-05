@@ -15,7 +15,7 @@ const casesTypeColors = {
       hex: "#7dd71d",
       rgb: "rgb(125, 215, 29)",
       half_op: "rgba(125, 215, 29, 0.5)",
-      multiplier: 1200
+      multiplier: 1000
    },
    deaths: {
       hex: "#CC1034",
@@ -34,41 +34,44 @@ export const showOneDecimalOnly = (number) => Math.round(number * 10) / 10;
 
 export const sortData = (data) => data.sort((a, b) => b.cases - a.cases);
 
-export const showDataOnMap = (countries, caseType = "cases") => (
-   countries.map(country => (
-      <Circle
-         center={[country.countryInfo.lat, country.countryInfo.long]}
-         fillOpacity={0.4}
-         color={casesTypeColors[caseType].hex}
-         fillColor={casesTypeColors[caseType].hex}
-         radius={
-            Math.sqrt(country[caseType]) * casesTypeColors[caseType].multiplier
-         }
-      >
-         <Popup>
-            <div className="popup-container">
-               <div className="popup-flag" style={{ backgroundImage: `url(${country.countryInfo.flag})` }}></div>
-               <div className="popup-country">{country.country}</div>
-               <div className="popup-cases">
-                  <div className="popup-marker popup-marker-cases"></div>
+export const showDataOnMap = (countries, caseType) => {
+   console.log(`=========== ${caseType} ${casesTypeColors[caseType].rgb} =========`);
+   return (
+      countries.map(country => (
+         <Circle
+            center={[country.countryInfo.lat, country.countryInfo.long]}
+            color={casesTypeColors[caseType].hex}
+            fillColor={casesTypeColors[caseType].hex}
+            fillOpacity={0.4}
+            radius={
+               Math.sqrt(country[caseType]) * casesTypeColors[caseType].multiplier
+            }
+         >
+            <Popup>
+               <div className="popup-container">
+                  <div className="popup-flag" style={{ backgroundImage: `url(${country.countryInfo.flag})` }}></div>
+                  <div className="popup-country">{country.country}</div>
+                  <div className="popup-cases">
+                     <div className="popup-marker popup-marker-cases"></div>
                   Cases: <span className="number">{numberWithCommas(country.cases)}</span>
-               </div>
-               <div className="popup-recovered">
-                  <div className="popup-marker popup-marker-recovered"></div>
+                  </div>
+                  <div className="popup-recovered">
+                     <div className="popup-marker popup-marker-recovered"></div>
                   Recovered: <span className="number">{numberWithCommas(country.recovered)}</span>
-               </div>
-               <div className="popup-deaths">
-                  <div className="popup-marker popup-marker-deaths"></div>
+                  </div>
+                  <div className="popup-deaths">
+                     <div className="popup-marker popup-marker-deaths"></div>
                   Deaths: <span className="number">{numberWithCommas(country.deaths)}</span>
+                  </div>
                </div>
-            </div>
-         </Popup>
-      </Circle>
-   ))
-);
+            </Popup>
+         </Circle>
+      ))
+   );
+};
 
 
-export const buildChartData = data => {
+export const buildChartData = (data, caseType) => {
    const chartData = [];
    let lastDataPoint;
 
@@ -76,13 +79,13 @@ export const buildChartData = data => {
       if (lastDataPoint) {
          const newDataPoint = {
             x: date,
-            y: data['cases'][date] - lastDataPoint
+            y: data[caseType][date] - lastDataPoint
          };
 
          chartData.push(newDataPoint);
       }
 
-      lastDataPoint = data['cases'][date];
+      lastDataPoint = data[caseType][date];
    };
 
    return chartData;

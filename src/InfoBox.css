@@ -1,7 +1,20 @@
 .infoBox {
   flex: 1;
+  cursor: pointer;
 }
 
 .infoBox:not(:last-child) {
   margin-right: 15px;
+}
+
+.infoBox--selected-confirmed {
+  background-color: rgba(222, 55, 0, 0.1) !important;
+}
+
+.infoBox--selected-recovered {
+  background-color: rgba(125, 215, 29, 0.1) !important;
+}
+
+.infoBox--selected-deceased {
+  background-color: rgba(204, 16, 52, 0.1) !important;
 }

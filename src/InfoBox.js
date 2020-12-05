@@ -5,7 +5,7 @@ import { styleInfoBox, styleInfoBoxTitle, styleTotalFunc, percentageStyle } from
 import './InfoBox.css';
 
 
-function InfoBox({ title, total, todayCases, percentage }) {
+function InfoBox({ title, total, todayCases, percentage, active, ...props }) {
    if (total) {
       total = numberWithCommas(total);
    }
@@ -21,7 +21,7 @@ function InfoBox({ title, total, todayCases, percentage }) {
    let styleTotal = styleTotalFunc(title);
 
    return (
-      <Card className="infoBox">
+      <Card onClick={props.onClick} className={`infoBox ${active && `infoBox--selected-${title.toLowerCase()}`}`}>
          <CardContent style={styleInfoBox}>
             <h2 className="infoBox__title" style={styleInfoBoxTitle}>
                {title} Cases

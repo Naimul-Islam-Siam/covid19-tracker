@@ -3,18 +3,40 @@ import { proxy, buildChartData, chartOptions } from './utils';
 import { Bar } from 'react-chartjs-2';
 
 
-const BarChart = () => {
+const BarChart = ({ caseType }) => {
    const [data, setData] = useState([]);
 
-   useEffect(() => {
-      fetch(`${proxy}https://disease.sh/v3/covid-19/historical/all?lastdays=60`)
-         .then(res => res.json())
-         .then(data => {
-            let chartData = buildChartData(data);
+   let bgColor;
+   let bdColor;
 
-            setData(chartData);
-         });
-   }, []);
+   if (caseType === 'cases') {
+      bgColor = "rgba(222, 55, 0, 0.8)";
+      bdColor = "rgb(222, 55, 0)";
+   }
+
+   if (caseType === 'recovered') {
+      bgColor = "rgba(125, 215, 29, 0.8)";
+      bdColor = "rgb(125, 215, 29)";
+   }
+
+   if (caseType === 'deaths') {
+      bgColor = "rgba(204, 16, 52, 0.8)";
+      bdColor = "rgb(204, 16, 52)";
+   }
+
+   useEffect(() => {
+      const fetchData = async () => {
+         await fetch(`${proxy}https://disease.sh/v3/covid-19/historical/all?lastdays=60`)
+            .then(res => res.json())
+            .then(data => {
+               let chartData = buildChartData(data, caseType);
+
+               setData(chartData);
+            });
+      };
+
+      fetchData();
+   }, [caseType]);
 
    return (
       <div style={{ marginTop: "15px" }}>
@@ -23,8 +45,8 @@ const BarChart = () => {
                data={{
                   datasets: [
                      {
-                        backgroundColor: "rgba(222, 55, 0, 0.8)",
-                        borderColor: "#DE3700",
+                        backgroundColor: bgColor,
+                        borderColor: bdColor,
                         data: data,
                      },
                   ],

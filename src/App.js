@@ -17,6 +17,7 @@ function App() {
   const [mapCenter, setMapCenter] = useState([34.80746, -40.4796]);
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
+  const [caseType, setCaseType] = useState('cases');
 
   useEffect(() => {
     fetch(`${proxy}https://disease.sh/v3/covid-19/all`)
@@ -62,7 +63,7 @@ function App() {
         setCountry(countryCode);
         setCountryInfo(data);
 
-        if (data.countryInfo.lat && data.countryInfo.long) {
+        if (event.target.value !== "worldwide") {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           console.log(mapCenter);
           setMapZoom(4);
@@ -92,13 +93,15 @@ function App() {
 
         <div className="app__stats">
           <Suspense>
-            <InfoBox title="Confirmed" total={cases} todayCases={todayCases} />
-            <InfoBox title="Recovered" total={recovered} todayCases={todayRecovered} percentage={recoveredPercent} />
-            <InfoBox title="Deceased" total={deaths} todayCases={todayDeaths} percentage={deathPercent} />
+            <InfoBox active={caseType === 'cases'} onClick={e => setCaseType('cases')} title="Confirmed" total={cases} todayCases={todayCases} />
+            <InfoBox active={caseType === 'recovered'} onClick={e => setCaseType('recovered')} title="Recovered" total={recovered} todayCases={todayRecovered} percentage={recoveredPercent} />
+            <InfoBox active={caseType === 'deaths'} onClick={e => setCaseType('deaths')} title="Deceased" total={deaths} todayCases={todayDeaths} percentage={deathPercent} />
           </Suspense>
         </div>
 
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Suspense>
+          <Map countries={mapCountries} caseType={caseType} center={mapCenter} zoom={mapZoom} />
+        </Suspense>
       </div>
 
 
@@ -109,8 +112,8 @@ function App() {
         </CardContent>
 
         <CardContent>
-          <h3>Worldwide new cases</h3>
-          <BarChart />
+          <h3>Worldwide new {caseType}</h3>
+          <BarChart className="app__chart" caseType={caseType} />
         </CardContent>
       </Card>
     </div>

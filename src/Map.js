@@ -1,14 +1,14 @@
 import React from 'react';
 import { MapContainer, TileLayer } from "react-leaflet";
-import { showDataOnMap } from './utils';
 import './Map.css';
+import { showDataOnMap } from './utils';
 
 const Map = ({ countries, caseType, center, zoom }) => {
    return (
       <div className="map">
          <MapContainer center={center} zoom={zoom}>
             <TileLayer
-               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+               url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png"
                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             {showDataOnMap(countries, caseType)}
@@ -17,4 +17,4 @@ const Map = ({ countries, caseType, center, zoom }) => {
    );
 };
 
-export default Map;
+export default React.memo(Map);

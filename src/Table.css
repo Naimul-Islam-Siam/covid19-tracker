@@ -2,7 +2,7 @@
   overflow-y: scroll;
   height: 400px;
   margin-top: 20px;
-  color: #6a5d5d;
+  color: #666;
 }
 
 .table tr:nth-of-type(odd) {
