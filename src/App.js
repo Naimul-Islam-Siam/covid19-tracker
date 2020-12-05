@@ -15,7 +15,7 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
   const [mapCenter, setMapCenter] = useState([34.80746, -40.4796]);
-  const [mapZoom, setMapZoom] = useState(3);
+  const [mapZoom, setMapZoom] = useState(2);
   const [mapCountries, setMapCountries] = useState([]);
   const [caseType, setCaseType] = useState('cases');
 
@@ -67,6 +67,11 @@ function App() {
           setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
           console.log(mapCenter);
           setMapZoom(4);
+        }
+
+        if (event.target.value === "worldwide") {
+          setMapCenter([34.80746, -40.4796]);
+          setMapZoom(2);
         }
       });
   };

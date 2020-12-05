@@ -10,17 +10,17 @@ const BarChart = ({ caseType }) => {
    let bdColor;
 
    if (caseType === 'cases') {
-      bgColor = "rgba(222, 55, 0, 0.8)";
+      bgColor = "rgba(222, 55, 0, 0.5)";
       bdColor = "rgb(222, 55, 0)";
    }
 
    if (caseType === 'recovered') {
-      bgColor = "rgba(125, 215, 29, 0.8)";
+      bgColor = "rgba(125, 215, 29, 0.5)";
       bdColor = "rgb(125, 215, 29)";
    }
 
    if (caseType === 'deaths') {
-      bgColor = "rgba(204, 16, 52, 0.8)";
+      bgColor = "rgba(204, 16, 52, 0.5)";
       bdColor = "rgb(204, 16, 52)";
    }
 
@@ -47,6 +47,7 @@ const BarChart = ({ caseType }) => {
                      {
                         backgroundColor: bgColor,
                         borderColor: bdColor,
+                        borderWidth: 1,
                         data: data,
                      },
                   ],

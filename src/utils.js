@@ -6,22 +6,16 @@ import './Map.css';
 
 const casesTypeColors = {
    cases: {
-      hex: "#DE3700",
-      rgb: "rgb(222, 55, 0)",
-      half_op: "rgba(222, 55, 0, 0.5)",
-      multiplier: 800 // size of circle
+      multiplier: 800, // size of circle
+      option: { color: "#DE3700", fillColor: "#DE3700" }
    },
    recovered: {
-      hex: "#7dd71d",
-      rgb: "rgb(125, 215, 29)",
-      half_op: "rgba(125, 215, 29, 0.5)",
-      multiplier: 1000
+      multiplier: 810,
+      option: { color: "#7dd71d", fillColor: "#7dd71d" }
    },
    deaths: {
-      hex: "#CC1034",
-      rgb: "rgb(204, 16, 52)",
-      half_op: "rgba(204, 16, 52, 0.5)",
-      multiplier: 2000
+      multiplier: 2000,
+      option: { color: "#CC1034", fillColor: "#CC1034" }
    },
 };
 
@@ -40,9 +34,8 @@ export const showDataOnMap = (countries, caseType) => {
       countries.map(country => (
          <Circle
             center={[country.countryInfo.lat, country.countryInfo.long]}
-            color={casesTypeColors[caseType].hex}
-            fillColor={casesTypeColors[caseType].hex}
-            fillOpacity={0.4}
+            fillOpacity={0.2}
+            pathOptions={casesTypeColors[caseType].option}
             radius={
                Math.sqrt(country[caseType]) * casesTypeColors[caseType].multiplier
             }
