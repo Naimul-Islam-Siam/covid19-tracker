@@ -43,7 +43,11 @@
   flex-grow: 1;
 }
 
-.app__chart {
+.app__table {
+  margin-bottom: 15px;
+}
+
+.app__chart__component {
   flex-grow: 1;
 }
 

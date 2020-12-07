@@ -109,18 +109,21 @@ function App() {
         </Suspense>
       </div>
 
+      <div className="app__right">
+        <Card className="app__table">
+          <CardContent>
+            <h3>Live Cases by Country</h3>
+            <Table countries={tableData} />
+          </CardContent>
+        </Card>
 
-      <Card className="app__right">
-        <CardContent>
-          <h3>Live Cases by Country</h3>
-          <Table countries={tableData} />
-        </CardContent>
-
-        <CardContent>
-          <h3>Worldwide new {caseType}</h3>
-          <BarChart className="app__chart" caseType={caseType} />
-        </CardContent>
-      </Card>
+        <Card className="app__chart">
+          <CardContent>
+            <h3>Worldwide new {caseType}</h3>
+            <BarChart className="app__chart__component" caseType={caseType} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
